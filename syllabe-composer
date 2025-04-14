@@ -1,0 +1,51 @@
+const composerContainer = document.getElementById("app-container");
+composerContainer.innerHTML = `
+  <h2>🔤 Crée ton mot magique par syllabes</h2>
+  <p>Choisis jusqu’à 3 syllabes en cliquant :</p>
+  <div id="syllable-grid" style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: 20px 0;"></div>
+  <p><strong>Ton mot :</strong> <span id="composed-word">...</span></p>
+  <p><strong>Émojis associés :</strong> <span id="emoji-line">...</span></p>
+  <button onclick="resetComposer()">🔄 Recommencer</button>
+`;
+
+const syllabes = {
+  "br": "🚀", "gl": "💧", "pl": "🫧", "tr": "⛰️", "sn": "🐍", "bl": "🧸", "cr": "⚡", "fl": "🌬️",
+  "dr": "🔥", "kl": "🧊", "zo": "🌀", "li": "🌈", "ma": "💖", "no": "🌙", "ti": "✨", "jo": "🕊️",
+  "ka": "🔮", "ru": "🎵", "ve": "🧚", "po": "🍵", "la": "🎶", "de": "🧠", "ou": "🫂", "en": "☁️",
+  "ra": "🌟", "si": "🔔", "za": "🪐", "ga": "🌱", "fa": "🌸", "ni": "🧘", "mo": "🧼", "pe": "🍑",
+  "ki": "💫", "lu": "🛸", "me": "🪷", "ya": "🌞", "to": "🍄", "fo": "🎭", "re": "🔁", "ta": "🎯"
+};
+
+let selectedSyllabes = [];
+
+const grid = document.getElementById("syllable-grid");
+for (let syl in syllabes) {
+  const btn = document.createElement("button");
+  btn.innerText = syl;
+  btn.style.padding = "10px";
+  btn.style.fontSize = "1em";
+  btn.style.borderRadius = "8px";
+  btn.style.border = "1px solid #aaa";
+  btn.style.backgroundColor = "#f0f0ff";
+  btn.style.cursor = "pointer";
+  btn.onclick = () => addSyllabe(syl);
+  grid.appendChild(btn);
+}
+
+function addSyllabe(syl) {
+  if (selectedSyllabes.length >= 3) return;
+  selectedSyllabes.push(syl);
+  updateComposer();
+}
+
+function updateComposer() {
+  const word = selectedSyllabes.join("");
+  const emojis = selectedSyllabes.map(s => syllabes[s] || "❓").join(" ");
+  document.getElementById("composed-word").innerText = word || "...";
+  document.getElementById("emoji-line").innerText = emojis || "...";
+}
+
+function resetComposer() {
+  selectedSyllabes = [];
+  updateComposer();
+}
