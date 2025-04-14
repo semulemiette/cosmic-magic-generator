@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Cosmic Magic Generator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="container">
+    <h1>✨ Cosmic Magic Generator ✨</h1>
+    <p class="subtitle">Des noms, des oracles, des gobelins, du rien — tout est là.</p>
+
+    <nav>
+      <button onclick="loadApp('oracle')">🔮 Oracle Extra Totale</button>
+      <button onclick="loadApp('dragon')">🐉 Dragon Name Forge</button>
+      <button onclick="loadApp('goblin')">👹 Goblin Name Generator</button>
+      <button onclick="loadApp('fortune')">🌌 Cosmic Fortune Vibes</button>
+    </nav>
+
+    <div id="app-container">
+      <p>Choisis une porte cosmique ci-dessus pour commencer.</p>
+    </div>
+  </div>
+
+  <script>
+    function loadApp(app) {
+      const script = document.createElement("script");
+      script.src = app + ".js";
+      script.onload = () => console.log(app + " loaded.");
+      document.getElementById("app-container").innerHTML = "";
+      document.body.appendChild(script);
+    }
+  </script>
+</body>
+</html>
